@@ -13,6 +13,6 @@ Gitee创建第三方应用：
 > https://gitee.com/oauth/applications
 更多细节请参见Gitee官方
 > Gitee OAuth2.0 接口文档
-> https://gitee.com/api/v5/swagger#/
-> OAuth教程文档
+> https://gitee.com/api/v5/swagger#/ <br>
+> OAuth教程文档<br>
 > https://gitee.com/api/v5/oauth_doc#/
