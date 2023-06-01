@@ -17,7 +17,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -26,18 +25,19 @@ public class GiteeUtil {
     public static final String ClientID = "8e3e44e237892aef9c1bfd1d3b2f5395b45483433707fc1391028975a1e736ee";
     public static final String ClientSecret = "88efc2c187e46a92ad2f78165c766152590ccd14df2847472acf616e21ede8cd";
 //    public static final String RedirectUri = "http://10.131.140.99/gitee/auth"; //回调地址
+
     public static final String RedirectUri = "http://47.120.8.115:80/newLogin"; //回调地址
 //    public static final String RedirectUri = "http://10.131.183.223:5173/newLogin"; //回调地址
     public static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
     /**
      * 拼接 URL
+     *
      * @return url
-     * @throws UnsupportedEncodingException Exception
      */
-    public static String getUrl() throws UnsupportedEncodingException {
+    public static String getUrl() {
         String url = URLEncoder.encode(RedirectUri, StandardCharsets.UTF_8);
-        String s ="https://gitee.com/oauth/authorize?client_id=" + ClientID + "&redirect_uri=" + url + "&response_type=code";
+        String s = "https://gitee.com/oauth/authorize?client_id=" + ClientID + "&redirect_uri=" + url + "&response_type=code";
         System.out.println("s = " + s);
         return s;
     }
@@ -136,7 +136,7 @@ public class GiteeUtil {
     public static Boolean updateGitte(UpdateGiteeUser user) throws IOException {
         HttpPatch httpPatch = new HttpPatch("https://gitee.com/api/v5/user");
         httpPatch.setHeader("Content-type", "application/json");
-        Object jsonParam = (JSONObject)JSON.toJSON(user);
+        Object jsonParam = JSON.toJSON(user);
         StringEntity entity = new StringEntity(jsonParam.toString(), StandardCharsets.UTF_8);
         httpPatch.setEntity(entity);
 
