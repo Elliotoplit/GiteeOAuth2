@@ -1,7 +1,6 @@
 package com.example.controller;
 
 
-import cn.hutool.core.lang.copier.Copier;
 import com.alibaba.fastjson.JSONObject;
 import com.example.Service.UserService;
 import com.example.domain.GiteeToken;
@@ -15,10 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/gitee")
+@CrossOrigin
 public class GiteeController {
 
     @Autowired
@@ -26,12 +25,13 @@ public class GiteeController {
 
     /**
      * 拼接访问地址
+     *
      * @return 跳转到拼接了clientID的url
      */
     @GetMapping("/login")
-    public String giteeLogin() throws UnsupportedEncodingException {
+    public String giteeLogin() {
         System.out.println("into auth");
-        return "redirect:"+ GiteeUtil.getUrl();
+        return "redirect:" + GiteeUtil.getUrl();
     }
 
     /**
@@ -84,22 +84,20 @@ public class GiteeController {
         GiteeUser user = GiteeUtil.getInfo(token);
         //如果数据库中没有该 Gitee 用户数据则添加数据到 Gitee 用户表
         GiteeUser existence = userService.selectByGiteeId(user.getId());
-        user.setPassword(existence.getPassword());
 
-
-        System.out.println(existence);//有密码
-        System.out.println(user);//无密码
-
-
-        if(existence==null){
+        if (existence != null) {
+            //用户已经注册
+            user.setPassword(existence.getPassword());
+            userService.deleteByID(user.getId());
+            System.out.println("info信息写入数据库:用户数据变化更新");
+            userService.addGiteeUser(user);
+        } else {
+            //用户未注册
             System.out.println("info信息写入数据库:from用户首次登录");
             userService.addGiteeUser(user);
-        } else if (!user.equals(existence)){
-            System.out.println("info信息写入数据库:用户数据变化更新");
-            userService.deleteByID(user.getId());
-            userService.addGiteeUser(user);
         }
-        return new Result(200,user);
+
+        return new Result(200, user);
     }
 
     //更新用户Gitee数据

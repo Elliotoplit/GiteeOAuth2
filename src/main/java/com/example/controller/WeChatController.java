@@ -10,11 +10,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/wechat")
+@CrossOrigin
 public class WeChatController {
 
     /**

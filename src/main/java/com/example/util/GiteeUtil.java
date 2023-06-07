@@ -24,8 +24,10 @@ public class GiteeUtil {
 
     public static final String ClientID = "8e3e44e237892aef9c1bfd1d3b2f5395b45483433707fc1391028975a1e736ee";
     public static final String ClientSecret = "88efc2c187e46a92ad2f78165c766152590ccd14df2847472acf616e21ede8cd";
-//    public static final String RedirectUri = "http://10.131.140.99/gitee/auth"; //回调地址
-    public static final String RedirectUri = "http://47.120.8.115:80/newLogin"; //回调地址
+    //    public static final String RedirectUri = "http://10.131.140.99/gitee/auth"; //回调地址
+//    public static final String RedirectUri = "http://localhost:5173/newLogin"; //回调地址
+    public static final String RedirectUri = "http://localhost:5173/newLogin"; //回调地址
+    //    public static final String RedirectUri = "http://47.120.8.115:5173/newLogin"; //回调地址
 //    public static final String RedirectUri = "http://10.131.183.223:5173/newLogin"; //回调地址
     public static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
@@ -120,14 +122,12 @@ public class GiteeUtil {
 
         //转为返回对象
         GiteeUser giteeUser = JSON.parseObject(jsonStr4User, GiteeUser.class);
-
         //判断邮箱字符串，如果邮箱存在则加入返回对象，否则保留null
         if (!jsonStr4email.equals("[]")) {
             String substring = jsonStr4email.substring(1, jsonStr4email.length() - 1);//修建json
             String email = JSON.parseObject(substring).getString("email");//获取邮箱
             giteeUser.setEmail(email);//将邮箱信息添加至用户
         }
-
         return giteeUser;
     }
 

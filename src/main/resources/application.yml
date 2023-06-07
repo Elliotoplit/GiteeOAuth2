@@ -9,8 +9,13 @@ spring:
     password: "010101"
     type: com.alibaba.druid.pool.DruidDataSource
 
+
 mybatis:
   configuration:
     # 字段和列名不一致：开启下划线-驼峰转换规则
     map-underscore-to-camel-case: true
+
+mybatis-plus:
+  global-config:
+    banner: false
 
