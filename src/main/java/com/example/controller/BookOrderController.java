@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import com.example.Service.BookOrderService;
+import com.example.Service.BookService;
+import com.example.Service.UserService;
 import com.example.domain.BookOrder;
 import com.example.domain.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,10 @@ public class BookOrderController {
 
     @Autowired
     private BookOrderService bookOrderService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/all")
     public Result getAllOrder() {
@@ -44,6 +50,13 @@ public class BookOrderController {
     @PostMapping
     public Result addBookOrder(@RequestBody BookOrder bookOrder) {
         System.out.println("新增条目..." + new Date());
+        Integer bookId = bookOrder.getBookId();
+        String bookName = bookService.getBookName(bookId);
+        String userName = userService.selectNameById(bookOrder.getUserId());
+        System.out.println("userName = " + userName);
+        bookOrder.setBookName(bookName);
+        bookOrder.setUserName(userName);
+        System.out.println("bookOrder = " + bookOrder);
         return bookOrderService.addBookOrder(bookOrder) ?
                 new Result(200, "添加成功") :
                 new Result(201, "添加失败 请检查输入数据");
@@ -53,6 +66,8 @@ public class BookOrderController {
     @PutMapping
     public Result updateBookOrder(@RequestBody BookOrder bookOrder) {
         System.out.println("修改条目..." + new Date());
+        bookOrder.setBookName(bookService.getBookName(bookOrder.getBookId()));
+        bookOrder.setUserName(userService.selectNameById(bookOrder.getBookId()));
         return bookOrderService.updateOrder(bookOrder) ?
                 new Result(200, "修改成功") :
                 new Result(201, "修改失败 请检查输入数据");

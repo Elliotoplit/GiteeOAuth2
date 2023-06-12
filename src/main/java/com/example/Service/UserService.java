@@ -11,9 +11,11 @@ public interface UserService {
 
     Boolean deleteByID(int id);
 
-    Boolean setPassword(String password,int id);
+    Boolean setPassword(String password, int id);
 
-    GiteeUser selectByIdAndPassword(int id,String password);
+    GiteeUser selectByIdAndPassword(int id, String password);
 
-    Boolean changePassword(String oldPw,String newPw,int id);
+    Boolean changePassword(String oldPw, String newPw, int id);
+
+    String selectNameById(Integer id);
 }

@@ -23,30 +23,29 @@ public class GiteeController {
     @Autowired
     UserService userService;
 
-    /**
-     * 拼接访问地址
-     *
-     * @return 跳转到拼接了clientID的url
-     */
-    @GetMapping("/login")
-    public String giteeLogin() {
-        System.out.println("into auth");
-        return "redirect:" + GiteeUtil.getUrl();
-    }
+//    /**
+//     * 拼接访问地址
+//     * @return 跳转到拼接了clientID的url
+//     */
+//    @GetMapping("/login")
+//    public String giteeLogin() {
+//        System.out.println("into auth");
+//        return "redirect:" + GiteeUtil.getUrl();
+//    }
 
     /**
      * Gitee 登录校验
+     *
      * @param code 授权校验码
      * @return res
      * @throws Exception io
      */
     @GetMapping("/auth")
     @ResponseBody
-    public Result giteeAuth(@RequestParam("code") String code,HttpSession session) throws Exception {
+    public Result giteeAuth(@RequestParam("code") String code, HttpSession session) throws Exception {
         System.out.println("----");
         System.out.println("code = " + code);
         GiteeToken giteeToken = GiteeUtil.getToken(code);
-//        String token = giteeToken.getAccessToken();
         System.out.println("giteeToken.toString() = " + giteeToken);
         System.out.println("----");
         return giteeToken.getError() ==null ?

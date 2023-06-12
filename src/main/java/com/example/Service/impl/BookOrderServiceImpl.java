@@ -50,6 +50,7 @@ public class BookOrderServiceImpl implements BookOrderService {
         return bookOrderDao.insert(bookOrder) > 0;
     }
 
+    //修改借阅记录
     @Override
     public Boolean updateOrder(BookOrder bookOrder) {
         return bookOrderDao.updateById(bookOrder) > 0;

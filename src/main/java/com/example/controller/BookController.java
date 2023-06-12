@@ -25,7 +25,7 @@ public class BookController {
 
     @GetMapping("/page")
     public Result getBooks(long current, long size) {
-        System.out.println("获取分页book请求：" + new Date());
+        System.out.println("获取分页book请求：" + current + ":" + size + " " + new Date());
         List<Book> allBook = bookService.getAllBook(current, size);
         return new Result(200, allBook);
     }
@@ -50,7 +50,7 @@ public class BookController {
 
     @GetMapping("/id")
     public Result getBookById(Integer bookId) {
-        System.out.println("根据id获取图书：" + new Date());
+        System.out.println("根据id获取图书信息：" + bookId + new Date());
         Book book = bookService.getByBookId(bookId);
 
         return book == null ?
@@ -90,8 +90,8 @@ public class BookController {
     //获取书名
     @GetMapping("/name")
     public Result getBookNameByID(Integer bookId) {
-        System.out.println("根据id获取图书：" + new Date());
-        String title = bookService.getByBookId(bookId).getTitle();
+        System.out.println("根据id获取图书名称：" + " " + new Date());
+        String title = bookService.getBookName(bookId);
         return title != null ? new Result(200, title) : new Result(201, "该id无对应图书");
     }
 

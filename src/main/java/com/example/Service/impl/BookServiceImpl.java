@@ -25,7 +25,6 @@ public class BookServiceImpl implements BookService {
     //分页查询
     @Override
     public List<Book> getAllBook(long current, long size) {
-        System.out.println(current + "x" + size);
         Page<Book> page = new Page<>(current, size);
         Page<Book> p = bookDao.selectPage(page, null);
         return p.getRecords();
@@ -78,7 +77,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String getBookName(Integer bookId) {
-        return "x";
+        LambdaQueryWrapper<Book> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Book::getId, bookId);
+        List<Book> books = bookDao.selectList(wrapper);
+        return books.get(0).getTitle();
     }
 
 

@@ -11,7 +11,9 @@ public class BookOrder {
     @TableId(type = IdType.AUTO)
     private Integer id;//借阅记录id
     private Integer bookId;//图书 id
+    private String bookName;//图书名
     private Integer userId;//用户 id （Gitee的用户id）
+    private String userName;//用户名
     private Integer status;//1借阅中 0已归还
     private String borrowDate;//借阅日期
     private String returnDate;//应还日期 = 借阅时间 + 3个月
