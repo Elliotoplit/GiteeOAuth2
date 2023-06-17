@@ -1,8 +1,5 @@
-package com.example.Service.impl;
+package com.example.trash;
 
-import com.example.Service.NewsService;
-import com.example.dao.NewsDao;
-import com.example.domain.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

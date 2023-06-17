@@ -75,11 +75,15 @@ public class BookServiceImpl implements BookService {
         return bookDao.updateById(book) > 0;
     }
 
+    //bookID -> bookName
     @Override
     public String getBookName(Integer bookId) {
         LambdaQueryWrapper<Book> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Book::getId, bookId);
         List<Book> books = bookDao.selectList(wrapper);
+        if (books.size() == 0) {
+            return "none";
+        }
         return books.get(0).getTitle();
     }
 

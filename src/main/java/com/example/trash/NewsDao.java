@@ -1,7 +1,6 @@
-package com.example.dao;
+package com.example.trash;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.domain.News;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

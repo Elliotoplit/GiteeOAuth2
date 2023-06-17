@@ -20,4 +20,10 @@ public class Result {
         this.status = status;
         this.data = data;
     }
+
+    public Result(Integer status, Object data, String msg) {
+        this.status = status;
+        this.data = data;
+        this.msg = msg;
+    }
 }

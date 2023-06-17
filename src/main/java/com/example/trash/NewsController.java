@@ -1,7 +1,5 @@
-package com.example.controller;
+package com.example.trash;
 
-import com.example.Service.NewsService;
-import com.example.domain.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

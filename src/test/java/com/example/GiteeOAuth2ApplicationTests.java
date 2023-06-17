@@ -39,30 +39,22 @@ class GiteeOAuth2ApplicationTests {
     void addOrderBookName() {
         List<BookOrder> allOrder = bookOrderService.getAllOrder();
         for (BookOrder order : allOrder) {
-//            补充书名
-//            Integer bookId = order.getBookId();
-//            String bookName = bookService.getByBookId(bookId).getTitle();
-//            System.out.println(bookName);
-//            order.setBookName(bookName);
-            //补充借阅者
-//            Integer userId = order.getUserId();
-//            String name = userService.selectByGiteeId(userId).getName();
-//            order.setUserName(name);
             bookOrderService.updateOrder(order);
         }
     }
 
 
     @Test
-    void testGetUserName() {
-        String s = userService.selectNameById(10503315);
-        System.out.println(s);
-    }
-
-    @Test
     void getBookName() {
         String bookName = bookService.getBookName(20045);
         System.out.println("bookName = " + bookName);
+    }
+
+    @Test
+    void testCheckExistence() {
+        int account = 123451;
+        int i = userService.checkAccountExistence(account);
+        System.out.println("i = " + i);
     }
 
 }

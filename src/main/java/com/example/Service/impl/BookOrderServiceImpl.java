@@ -15,32 +15,18 @@ public class BookOrderServiceImpl implements BookOrderService {
     @Autowired
     private BookOrderDao bookOrderDao;
 
+    //获取所有借阅记录
     @Override
     public List<BookOrder> getAllOrder() {
         List<BookOrder> bookOrders = bookOrderDao.selectList(null);
         return bookOrderDao.selectList(null);
     }
 
+    //获取图书借阅记录 By username
     @Override
-    public List<BookOrder> getOrderById(Integer userId) {
+    public List<BookOrder> getOrderByUsername(String username) {
         QueryWrapper<BookOrder> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(BookOrder::getUserId, userId);
-        return bookOrderDao.selectList(wrapper);
-    }
-
-    //获取借阅中条目
-    @Override
-    public List<BookOrder> getUnReturnBookOrder() {
-        QueryWrapper<BookOrder> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(BookOrder::getStatus, 1);
-        return bookOrderDao.selectList(wrapper);
-    }
-
-    //获取已归还条目
-    @Override
-    public List<BookOrder> getReturnedBookOrder() {
-        QueryWrapper<BookOrder> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(BookOrder::getStatus, 0);
+        wrapper.lambda().eq(BookOrder::getUsername, username);
         return bookOrderDao.selectList(wrapper);
     }
 

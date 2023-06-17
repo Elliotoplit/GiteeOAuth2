@@ -1,6 +1,4 @@
-package com.example.Service;
-
-import com.example.domain.News;
+package com.example.trash;
 
 import java.util.List;
 

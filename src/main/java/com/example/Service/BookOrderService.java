@@ -10,13 +10,7 @@ public interface BookOrderService {
     List<BookOrder> getAllOrder();
 
     //获取某用户所有图书借阅条目
-    List<BookOrder> getOrderById(Integer id);
-
-    //获取未归还图书条目
-    List<BookOrder> getUnReturnBookOrder();
-
-    //获取已归还图书条目
-    List<BookOrder> getReturnedBookOrder();
+    List<BookOrder> getOrderByUsername(String username);
 
     //新增借阅记录
     Boolean addBookOrder(BookOrder bookOrder);
@@ -26,6 +20,4 @@ public interface BookOrderService {
 
     //删除借阅记录
     Boolean delOrder(Integer orderId);
-
-
 }
