@@ -9,6 +9,8 @@ import com.example.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -80,15 +82,20 @@ public class UserServiceImpl implements UserService {
     public User selectByGiteeId(int giteeId) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getGiteeId, giteeId);
-        return userDao.selectList(wrapper).get(0);
+        List<User> users = userDao.selectList(wrapper);
+        if (users.size() != 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
     }
 
     //5.绑定Gitee数据到账号
     @Override
     public int bindGiteeData(User user) {
         //查询当前完整对象的GiteeId是否被绑定过
-        User u = userDao.selectOne(new LambdaUpdateWrapper<User>().eq(User::getGiteeId, user.getGiteeId()));
-        if (u != null) {
+        List<User> users = userDao.selectList(new LambdaUpdateWrapper<User>().eq(User::getGiteeId, user.getGiteeId()));
+        if (users.size() != 0) {
             return GITEE_IN; //用户已经被绑定
         } else {
             return userDao.updateById(user);

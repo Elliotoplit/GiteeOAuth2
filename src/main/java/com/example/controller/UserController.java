@@ -170,7 +170,7 @@ public class UserController {
         System.out.println("userInDB = " + userInDB);
         //2.判定重复绑定
         if (Objects.equals(userInGitee.getGiteeId(), userInDB.getGiteeId())) {
-            return new Result(201, "你的账号已经与此Gitee账号绑定");
+            return new Result(200, userInGitee, "你的账号已经与此Gitee账号绑定");
         }
         //3.云端对象数据 + 本地对象数据 = 完整对象
         System.out.println("bind:信息写入数据库:用户数据变化更新");

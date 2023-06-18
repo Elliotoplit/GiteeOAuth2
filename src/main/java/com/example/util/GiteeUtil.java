@@ -24,7 +24,9 @@ public class GiteeUtil {
 
     public static final String ClientID = "8e3e44e237892aef9c1bfd1d3b2f5395b45483433707fc1391028975a1e736ee";
     public static final String ClientSecret = "88efc2c187e46a92ad2f78165c766152590ccd14df2847472acf616e21ede8cd";
-    public static final String RedirectUri = "http://47.120.8.115/me"; //回调地址
+    //    public static final String RedirectUri = "http://47.120.8.115/me"; //回调地址
+//    public static final String RedirectUri = "http://localhost:5173/login"; //回调地址
+    public static final String RedirectUri = "http://47.120.8.115/login"; //回调地址
     public static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
     /**
